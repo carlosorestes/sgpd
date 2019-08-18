@@ -1,71 +1,70 @@
 package com.sgpd.br.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbUser")
-public class User implements Serializable {
+@Table(name = "tbOrder")
+public class Order implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
-	private String phone;
-	private String password;
+	private Instant moment;
 	
-	@OneToMany(mappedBy = "user")
-	private List<Order> orders  = new ArrayList<>(); 
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
-	public User() {
+	@ManyToOne
+	@JoinColumn(name = "person_id")
+	private Person person;
 	
+	public Order() {
+		
 	}
-	
-	public User(Long id, String nome, String phone, String password) {
+
+	public Order(Long id, Instant moment, User client) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.phone = phone;
-		this.password = password;
+		this.moment = moment;
+		this.user = client;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
+
+	public Instant getMoment() {
+		return moment;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+
+	public void setMoment(Instant moment) {
+		this.moment = moment;
 	}
-	public String getPhone() {
-		return phone;
+
+	public User getClient() {
+		return user;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+
+	public void setClient(User client) {
+		this.user = client;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public List<Order> getOrders() {
-		return orders;
-	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,6 +72,7 @@ public class User implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,7 +81,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Order other = (Order) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

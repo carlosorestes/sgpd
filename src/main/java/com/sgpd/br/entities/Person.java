@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbUser")
-public class User implements Serializable {
+@Table(name = "tbPerson")
+public class Person implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -21,51 +21,65 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String phone;
-	private String password;
+	private String cpf;
+	private String telefone1;
+	private String telefone2;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "person")
 	private List<Order> orders  = new ArrayList<>(); 
 	
-	public User() {
-	
+	public Person() {
 	}
-	
-	public User(Long id, String nome, String phone, String password) {
+
+	public Person(Long id, String nome, String cpf, String telefone1, String telefone2) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.phone = phone;
-		this.password = password;
+		this.cpf = cpf;
+		this.telefone1 = telefone1;
+		this.telefone2 = telefone2;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getPhone() {
-		return phone;
+
+	public String getCpf() {
+		return cpf;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
-	public String getPassword() {
-		return password;
+
+	public String getTelefone1() {
+		return telefone1;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setTelefone1(String telefone1) {
+		this.telefone1 = telefone1;
 	}
-	public List<Order> getOrders() {
-		return orders;
+
+	public String getTelefone2() {
+		return telefone2;
 	}
-	
+
+	public void setTelefone2(String telefone2) {
+		this.telefone2 = telefone2;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,6 +87,7 @@ public class User implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,7 +96,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Person other = (Person) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -89,5 +104,5 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }
