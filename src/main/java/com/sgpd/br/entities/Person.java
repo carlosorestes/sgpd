@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tbPerson")
 public class Person implements Serializable {
@@ -25,8 +27,9 @@ public class Person implements Serializable {
 	private String telefone1;
 	private String telefone2;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "person")
-	private List<Order> orders  = new ArrayList<>(); 
+	private List<Order> orders  = new ArrayList<>();
 	
 	public Person() {
 	}
@@ -78,6 +81,10 @@ public class Person implements Serializable {
 
 	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
+	}
+	
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
