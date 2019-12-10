@@ -32,8 +32,8 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 //		Add User of System
-		User user1 = new User(null, "user1", "11111", "11111");
-		User user2 = new User(null, "user2", "22222", "22222");
+		User user1 = new User(null, "user1", "11111", "11111", "ativo");
+		User user2 = new User(null, "user2", "22222", "22222", "ativo");
 		
 //		Add Client of System
 		Person person1 = new Person(null, "Person 111","000000000", "33333333333", "333333333");

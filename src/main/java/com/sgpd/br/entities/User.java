@@ -25,6 +25,7 @@ public class User implements Serializable {
 	private String nome;
 	private String phone;
 	private String password;
+	private String status;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
@@ -34,12 +35,12 @@ public class User implements Serializable {
 	
 	}
 	
-	public User(Long id, String nome, String phone, String password) {
-		super();
+	public User(Long id, String nome, String phone, String password, String status) {
 		this.id = id;
 		this.nome = nome;
 		this.phone = phone;
 		this.password = password;
+		this.status = status;
 	}
 	public Long getId() {
 		return id;
@@ -68,7 +69,13 @@ public class User implements Serializable {
 	public List<Order> getOrders() {
 		return orders;
 	}
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
