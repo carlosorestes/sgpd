@@ -23,4 +23,12 @@ public class UserService {
 		Optional<User> user = userRepository.findById(id);
 		return user.get();
 	}
+	
+	public void delbyId(User user) {
+		userRepository.delete(user);
+	}
+	
+	public User save(User user) {
+		return userRepository.save(user);
+	}
 }
