@@ -6,6 +6,5 @@ import com.sgpd.br.entities.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
 	
-	
-	
+	public Person findByCpf(String cpf);
 }

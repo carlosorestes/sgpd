@@ -88,6 +88,12 @@ public class Person implements Serializable {
 	}
 
 	@Override
+	public String toString() {
+		return "Person [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone1=" + telefone1 + ", telefone2="
+				+ telefone2 + ", orders=" + orders + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

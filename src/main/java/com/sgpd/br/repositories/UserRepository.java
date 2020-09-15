@@ -6,6 +6,6 @@ import com.sgpd.br.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	
-	
+	public User findByNome(String nome);
 	
 }
