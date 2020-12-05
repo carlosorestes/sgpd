@@ -1,8 +1,10 @@
 package com.sgpd.br.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sgpd.br.entities.Order;
 
 public class VehicleDTO implements Serializable {
 	
@@ -29,9 +31,12 @@ public class VehicleDTO implements Serializable {
 	@JsonProperty(value= "renavam")
 	private String renavam;
 	
+	private Order order;
 	
-	public VehicleDTO() {
-	}
+	private Date dataCriacao;
+	
+	private Date dataAtualizacao;
+	
 	
 	public Long getId() {
 		return id;
@@ -87,6 +92,30 @@ public class VehicleDTO implements Serializable {
 
 	public void setRenavam(String renavam) {
 		this.renavam = renavam;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public Date getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	public void setDataAtualizacao(Date dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
 	}
 
 	@Override

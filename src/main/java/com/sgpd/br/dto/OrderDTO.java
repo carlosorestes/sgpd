@@ -6,6 +6,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sgpd.br.entities.Order;
+import com.sgpd.br.entities.Person;
+import com.sgpd.br.entities.User;
+import com.sgpd.br.entities.Vehicle;
 
 public class OrderDTO implements Serializable {
 
@@ -62,7 +65,7 @@ public class OrderDTO implements Serializable {
 		this.listVehicles = vehiclesDTO;
 	}
 
-	public Order buildOrder(OrderDTO orderDTO) {
+	public Order buildOrder(User user, Person person) {
 		Order order = new Order();
 		order.setId(id);
 		order.setDataEntradaOrgao(dtEntradaOrgao);
@@ -70,6 +73,8 @@ public class OrderDTO implements Serializable {
 		order.setDataPronto(dtPronto);
 		order.setRecommendation(indicacao);
 		order.setNote(obs);
+		order.setUser(user);
+		order.setPerson(person);
 		return order;
 	}
 

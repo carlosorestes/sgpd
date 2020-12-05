@@ -11,9 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "tbUser")
@@ -26,8 +24,9 @@ public class User implements Serializable {
 	private Long id;
 	private String nome;
 	private String phone;
+	private String user;
 	private String password;
-	private String status;
+	private Boolean status;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
@@ -37,13 +36,15 @@ public class User implements Serializable {
 	
 	}
 	
-	public User(Long id, String nome, String phone, String password, String status) {
+	public User(Long id, String nome, String phone, String user, String password, Boolean status) {
 		this.id = id;
 		this.nome = nome;
 		this.phone = phone;
+		this.user = user;
 		this.password = password;
 		this.status = status;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -62,6 +63,12 @@ public class User implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -71,10 +78,10 @@ public class User implements Serializable {
 	public List<Order> getOrders() {
 		return orders;
 	}
-	public String getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 
@@ -83,8 +90,15 @@ public class User implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((orders == null) ? 0 : orders.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -98,6 +112,36 @@ public class User implements Serializable {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (orders == null) {
+			if (other.orders != null)
+				return false;
+		} else if (!orders.equals(other.orders))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}

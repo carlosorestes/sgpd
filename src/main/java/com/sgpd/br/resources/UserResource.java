@@ -48,7 +48,7 @@ public class UserResource {
 	
 	@GetMapping( value = "/validateLogin" )
 	public ResponseEntity<User> validateLogin() {
-		return ResponseEntity.ok().body(new User(1L, "javainuse", "phone", "password", "status"));
+		return ResponseEntity.ok().body(new User(1L, "javainuse", "phone", "javainuse", "password", Boolean.TRUE));
 	}
 	
 	@DeleteMapping(path = { "/{id}" })

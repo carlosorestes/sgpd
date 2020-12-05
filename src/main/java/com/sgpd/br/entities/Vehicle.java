@@ -2,8 +2,8 @@ package com.sgpd.br.entities;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,7 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -46,9 +46,9 @@ public class Vehicle {
 	@Column(name = "renavam", nullable = false)
 	private String renavam;
 	
-	@ManyToMany(mappedBy = "listVeiculo")
+	@OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
 	@JsonBackReference
-	private List<Order> listOrder;
+	private List<OrderVehicle> listOrderVehicle;
 	
 	@Column(name = "data_criacao", nullable = false)
 	private Date dataCriacao;
@@ -145,12 +145,12 @@ public class Vehicle {
 		this.tipoVeiculo = tipoVeiculo;
 	}
 
-	public List<Order> getListOrder() {
-		return listOrder;
+	public List<OrderVehicle> getListOrderVehicle() {
+		return listOrderVehicle;
 	}
 
-	public void setListOrder(List<Order> listOrder) {
-		this.listOrder = listOrder;
+	public void setListVeiculo(List<OrderVehicle> listOrderVehicle) {
+		this.listOrderVehicle = listOrderVehicle;
 	}
 
 	@PreUpdate
@@ -193,7 +193,7 @@ public class Vehicle {
 	@Override
 	public String toString() {
 		return "Veiculo [id=" + id + ", ano=" + ano + ", modelo=" + modelo + ", cor=" + cor + ", placa=" + placa
-				+ ", renavam=" + renavam + ", tipoVeiculo=" + tipoVeiculo + ", listOrder=" + listOrder.toString() + ", dataCriacao="
+				+ ", renavam=" + renavam + ", tipoVeiculo=" + tipoVeiculo + ", listOrder=" + listOrderVehicle.toString() + ", dataCriacao="
 				+ dataCriacao + ", dataAtualizacao=" + dataAtualizacao + "]";
 	}
 

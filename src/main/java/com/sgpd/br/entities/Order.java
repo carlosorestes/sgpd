@@ -2,6 +2,7 @@ package com.sgpd.br.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,18 +13,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tbOrder")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Order implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -43,13 +47,8 @@ public class Order implements Serializable {
 	@JoinColumn(name = "person_id")
 	private Person person;
 	
-	@ManyToMany
-	@JoinTable(
-		name = "order_vehicle",
-		joinColumns = @JoinColumn(name = "order_id"),
-		inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
-	@JsonManagedReference
-	private List<Vehicle> listVeiculo;
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<OrderVehicle> listOrderVehicle;
 	
 	@Column(name = "data_criacao", nullable = false)
 	private Date dataCriacao;
@@ -72,11 +71,12 @@ public class Order implements Serializable {
 	@Column(name = "note", nullable = false)
 	private String note;
 	
+	private String status;
+	
 	public Order() {
-		
 	}
 
-	public Order(Long id, Instant moment, User client, Person person, Date dataEntradaOrgao, Date dataPronto, Date dataEntrega, String recommendation, String note, List<Vehicle> listVeiculo) {
+	public Order(Long id, Instant moment, User client, Person person, Date dataEntradaOrgao, Date dataPronto, Date dataEntrega, String recommendation, String note, String status) {
 		this.id = id;
 		this.moment = moment;
 		this.user = client;
@@ -86,7 +86,8 @@ public class Order implements Serializable {
 		this.dataEntrega = dataEntrega;
 		this.recommendation = recommendation;
 		this.note = note;
-		this.listVeiculo = listVeiculo;
+		this.status = status;
+		this.listOrderVehicle = new ArrayList<OrderVehicle>();
 	}
 
 	public Long getId() {
@@ -121,12 +122,12 @@ public class Order implements Serializable {
 		this.person = person;
 	}
 
-	public List<Vehicle> getListVeiculo() {
-		return listVeiculo;
+	public List<OrderVehicle> getListOrderVehicle() {
+		return listOrderVehicle;
 	}
 
-	public void setListVeiculo(List<Vehicle> listVeiculo) {
-		this.listVeiculo = listVeiculo;
+	public void setListOrderVehicle(List<OrderVehicle> listOrderVehicle) {
+		this.listOrderVehicle = listOrderVehicle;
 	}
 
 	public Date getDataCriacao() {
@@ -185,6 +186,26 @@ public class Order implements Serializable {
 		this.note = note;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		dataAtualizacao = new Date();
+	}
+	
+	@PrePersist
+	public void prePersist() {
+		final Date atual = new Date();
+		dataCriacao = atual;
+		dataAtualizacao = atual;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -209,24 +230,14 @@ public class Order implements Serializable {
 			return false;
 		return true;
 	}
-	
-	@PreUpdate
-	public void preUpdate() {
-		dataAtualizacao = new Date();
-	}
-	
-	@PrePersist
-	public void prePersist() {
-		final Date atual = new Date();
-		dataCriacao = atual;
-		dataAtualizacao = atual;
-	}
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", moment=" + moment + ", user=" + user + ", person=" + person + ", listVeiculo="
-				+ listVeiculo + ", dataCriacao=" + dataCriacao + ", dataEntradaOrgao=" + dataEntradaOrgao
-				+ ", dataPronto=" + dataPronto + ", dataEntrega=" + dataEntrega + ", dataAtualizacao=" + dataAtualizacao
-				+ ", recommendation=" + recommendation + ", note=" + note + "]";
+		return "Order [id=" + id + ", moment=" + moment + ", user=" + user + ", person=" + person
+				+ ", listOrderVehicle=" + listOrderVehicle + ", dataCriacao=" + dataCriacao + ", dataEntradaOrgao="
+				+ dataEntradaOrgao + ", dataPronto=" + dataPronto + ", dataEntrega=" + dataEntrega
+				+ ", dataAtualizacao=" + dataAtualizacao + ", recommendation=" + recommendation + ", note=" + note
+				+ ", status=" + status + "]";
 	}
+
 }

@@ -1,10 +1,11 @@
 package com.sgpd.br.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.sgpd.br.entities.Person;
 
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
 	
-	public Person findByCpf(String cpf);
+	Person findByCpf(String cpf);
+	
 }

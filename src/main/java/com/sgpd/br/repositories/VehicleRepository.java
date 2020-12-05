@@ -6,5 +6,6 @@ import com.sgpd.br.entities.Vehicle;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     
-	public Vehicle findByRenavam(String nome);
+	public Vehicle findByRenavam(String renavam);
+	
 }

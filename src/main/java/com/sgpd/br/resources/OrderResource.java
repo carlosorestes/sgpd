@@ -1,5 +1,6 @@
 package com.sgpd.br.resources;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -47,7 +48,7 @@ public class OrderResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Order> create(@RequestBody OrderDTO orderDTO) {
+	public ResponseEntity<Order> create(@RequestBody OrderDTO orderDTO) throws IOException {
 		return ResponseEntity.ok().body(orderService.replaceAndSaveOrder(orderDTO));
 	}
 
