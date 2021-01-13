@@ -49,7 +49,6 @@ public class OrderService {
 		return order.get();
 	}
 	
-	@Async
 	public Order replaceAndSaveOrder(OrderDTO dto) throws IOException {
 		List<OrderVehicle> listOrderVehicle = new ArrayList<OrderVehicle>();
 		Order order = new Order();

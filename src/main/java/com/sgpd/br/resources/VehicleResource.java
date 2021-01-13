@@ -1,9 +1,13 @@
 package com.sgpd.br.resources;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +21,9 @@ public class VehicleResource {
 	
 	@Autowired
 	private VehicleService vehicleService;
+	
+	@Autowired
+	private OrderVehicleResourceAssembler orderVehicleAssembler;
 	
 	@GetMapping(value = "/{renavam}")
 	public ResponseEntity<Vehicle> findByRenavam(@PathVariable String renavam){
@@ -33,6 +40,12 @@ public class VehicleResource {
 	@GetMapping(value = "/requestBbpmId/{requestBbpmId}")
 	public ResponseEntity<VehicleDTO> findById(@PathVariable String requestBbpmId){
 		VehicleDTO veiVehicle = vehicleService.findOrderVehicleByRequestBbpmId(requestBbpmId);
+		return ResponseEntity.ok().body(veiVehicle);
+	}
+	
+	@PatchMapping(value = "/renavam/{renavam}/orderId/{orderId}")
+	public ResponseEntity<VehicleDTO> update(@PathVariable String renavam, @PathVariable Long orderId, @RequestBody VehicleDTO vehicleDTO) throws IOException {
+		VehicleDTO veiVehicle = orderVehicleAssembler.toResource(vehicleService.updateStatusVehicleByOrderIdAndRenavam(renavam, orderId, vehicleDTO));
 		return ResponseEntity.ok().body(veiVehicle);
 	}
 

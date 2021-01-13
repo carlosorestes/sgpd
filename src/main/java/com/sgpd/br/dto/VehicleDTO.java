@@ -3,6 +3,8 @@ package com.sgpd.br.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sgpd.br.entities.Order;
 
@@ -30,6 +32,12 @@ public class VehicleDTO implements Serializable {
 	
 	@JsonProperty(value= "renavam")
 	private String renavam;
+	
+	@JsonProperty(value= "status")
+	private String status;
+	
+	@JsonProperty(value = "log_external_data")
+	private String logExternalData;
 	
 	private Order order;
 	
@@ -92,6 +100,22 @@ public class VehicleDTO implements Serializable {
 
 	public void setRenavam(String renavam) {
 		this.renavam = renavam;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getLogExternalData() {
+		return logExternalData;
+	}
+
+	public void setLogExternalData(String logExternalData) {
+		this.logExternalData = logExternalData;
 	}
 
 	public Order getOrder() {

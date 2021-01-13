@@ -3,6 +3,7 @@ package com.sgpd.br.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -55,6 +56,9 @@ public class OrderVehicle implements Serializable{
 	private String status;
 	
 	private String requestBbpmId;
+	
+	@Column(name = "log_external_data")
+	private String logExternalData;
 	
 	public OrderVehicle() {
 		
@@ -122,6 +126,14 @@ public class OrderVehicle implements Serializable{
 		this.requestBbpmId = requestBbpmId;
 	}
 
+	public String getLogExternalData() {
+		return logExternalData;
+	}
+
+	public void setLogExternalData(String logExternalData) {
+		this.logExternalData = logExternalData;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -161,9 +173,8 @@ public class OrderVehicle implements Serializable{
 
 	@Override
 	public String toString() {
-		return "OrderVehicle [order=" + order + ", vehicle=" + vehicle + ", createDateTime=" + createDateTime
-				+ ", updateDateTime=" + updateDateTime + ", status=" + status + ", requestBbpmId=" + requestBbpmId
-				+ "]";
+		return "OrderVehicle [orderVehicleId=" + orderVehicleId + ", order=" + order + ", vehicle=" + vehicle
+				+ ", createDateTime=" + createDateTime + ", updateDateTime=" + updateDateTime + ", status=" + status
+				+ ", requestBbpmId=" + requestBbpmId + ", logExternalData=" + logExternalData + "]";
 	}
-
 }

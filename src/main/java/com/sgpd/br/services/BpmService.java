@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.sgpd.br.entities.Order;
@@ -17,6 +18,7 @@ public class BpmService {
 	@Autowired
 	private BpmGateway bpmGateway;
 	
+	@Async
 	public Map<String, String> startProcessDefinitionKey(String processDefinitionKey, Order order) throws IOException {
 		Map<String, String> responseBbm = new HashMap<>();
 		for(OrderVehicle orderVehicle: order.getListOrderVehicle()) {

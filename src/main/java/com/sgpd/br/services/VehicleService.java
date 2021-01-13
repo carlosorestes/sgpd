@@ -2,6 +2,7 @@ package com.sgpd.br.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.sgpd.br.dto.VehicleDTO;
 import com.sgpd.br.entities.OrderVehicle;
@@ -51,5 +52,21 @@ public class VehicleService {
 		vehicleDTO.setPlaca(orderVehicle.getVehicle().getPlaca());
 		vehicleDTO.setRenavam(orderVehicle.getVehicle().getRenavam());
 		return vehicleDTO;
+	}
+	
+	public OrderVehicle updateStatusVehicleByOrderIdAndRenavam(String renavam, Long orderId, VehicleDTO vehicleDTO) {
+		//TODO: Add Exception handle validation object is null
+		OrderVehicle orderVehicleMerged = orderVehicleRepository.findOrderVehicleByRenavamOrderId(renavam, orderId);
+		if(vehicleDTO != null) {
+			if(!StringUtils.isEmpty(vehicleDTO.getStatus())) {
+				orderVehicleMerged.setStatus(vehicleDTO.getStatus());
+			}
+			
+			if(!StringUtils.isEmpty(vehicleDTO.getLogExternalData())) {
+				System.out.println("xxxxxxxxx "+vehicleDTO.getLogExternalData());
+				orderVehicleMerged.setLogExternalData(vehicleDTO.getLogExternalData());
+			}
+		}
+		return orderVehicleRepository.save(orderVehicleMerged);
 	}
 }
