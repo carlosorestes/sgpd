@@ -80,18 +80,18 @@ public class TestConfig implements CommandLineRunner {
 		o1 = orderRepository.save(o1);
 		o2 = orderRepository.save(o2);
 		
-		OrderVehicle orderVehicle1 = new OrderVehicle(o1, v1, "111111");
-		OrderVehicle orderVehicle2 = new OrderVehicle(o1, v2, "222222");
-		OrderVehicle orderVehicle3 = new OrderVehicle(o1, v3, "333333");
-		OrderVehicle orderVehicle4 = new OrderVehicle(o1, v4, "444444");
-		OrderVehicle orderVehicle5 = new OrderVehicle(o1, v5, "555555");
+		OrderVehicle orderVehicle1 = new OrderVehicle(o1, v1);
+		OrderVehicle orderVehicle2 = new OrderVehicle(o1, v2);
+		OrderVehicle orderVehicle3 = new OrderVehicle(o1, v3);
+		OrderVehicle orderVehicle4 = new OrderVehicle(o1, v4);
+		OrderVehicle orderVehicle5 = new OrderVehicle(o1, v5);
 		o1.getListOrderVehicle().addAll(Arrays.asList(new OrderVehicle[] {orderVehicle1, orderVehicle2, orderVehicle3, orderVehicle4, orderVehicle5}));
 		
-		OrderVehicle orderVehicle10 = new OrderVehicle(o2, v10, "666666");
-		OrderVehicle orderVehicle20 = new OrderVehicle(o2, v20, "777777");
-		OrderVehicle orderVehicle30 = new OrderVehicle(o2, v30, "888888");
-		OrderVehicle orderVehicle40 = new OrderVehicle(o2, v40, "999999");
-		OrderVehicle orderVehicle50 = new OrderVehicle(o2, v50, "101010");
+		OrderVehicle orderVehicle10 = new OrderVehicle(o2, v10);
+		OrderVehicle orderVehicle20 = new OrderVehicle(o2, v20);
+		OrderVehicle orderVehicle30 = new OrderVehicle(o2, v30);
+		OrderVehicle orderVehicle40 = new OrderVehicle(o2, v40);
+		OrderVehicle orderVehicle50 = new OrderVehicle(o2, v50);
 		o2.getListOrderVehicle().addAll(Arrays.asList(new OrderVehicle[] {orderVehicle10, orderVehicle20, orderVehicle30, orderVehicle40, orderVehicle50}));
 		
 		orderVehicleRepository.saveAll(Arrays.asList(orderVehicle1, orderVehicle2, orderVehicle3, orderVehicle4, orderVehicle5,

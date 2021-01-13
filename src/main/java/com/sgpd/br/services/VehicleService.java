@@ -41,19 +41,6 @@ public class VehicleService {
 		return vehicleDTO;
 	}
 	
-	public VehicleDTO findOrderVehicleByRequestBbpmId(String requestBbpmId) {
-		VehicleDTO vehicleDTO = new VehicleDTO();
-		OrderVehicle orderVehicle = orderVehicleRepository.findOrderVehicleByRequestBbpmId(requestBbpmId);
-		vehicleDTO.setId(orderVehicle.getOrder().getId());
-		vehicleDTO.setTipo(orderVehicle.getVehicle().getTipoVeiculo().name());
-		vehicleDTO.setAno(orderVehicle.getVehicle().getAno());
-		vehicleDTO.setModelo(orderVehicle.getVehicle().getModelo());
-		vehicleDTO.setCor(orderVehicle.getVehicle().getCor());
-		vehicleDTO.setPlaca(orderVehicle.getVehicle().getPlaca());
-		vehicleDTO.setRenavam(orderVehicle.getVehicle().getRenavam());
-		return vehicleDTO;
-	}
-	
 	public OrderVehicle updateStatusVehicleByOrderIdAndRenavam(String renavam, Long orderId, VehicleDTO vehicleDTO) {
 		//TODO: Add Exception handle validation object is null
 		OrderVehicle orderVehicleMerged = orderVehicleRepository.findOrderVehicleByRenavamOrderId(renavam, orderId);

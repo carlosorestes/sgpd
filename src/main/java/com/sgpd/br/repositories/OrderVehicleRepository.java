@@ -10,8 +10,5 @@ public interface OrderVehicleRepository extends JpaRepository<OrderVehicle, Orde
 	
 	@Query("select ov from OrderVehicle ov inner join ov.order o inner join ov.vehicle v where o.id = :orderId and v.renavam = :renavam")
 	OrderVehicle findOrderVehicleByRenavamOrderId(String renavam, Long orderId);
-	
-	@Query("select ov from OrderVehicle ov inner join ov.order o inner join ov.vehicle v where ov.requestBbpmId = :requestBbpmId")
-	OrderVehicle findOrderVehicleByRequestBbpmId(String requestBbpmId);
 
 }

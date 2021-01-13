@@ -55,8 +55,6 @@ public class OrderVehicle implements Serializable{
 	
 	private String status;
 	
-	private String requestBbpmId;
-	
 	@Column(name = "log_external_data")
 	private String logExternalData;
 	
@@ -64,10 +62,9 @@ public class OrderVehicle implements Serializable{
 		
 	}
 
-	public OrderVehicle(Order order, Vehicle vehicle, String requestBbpmId) {
+	public OrderVehicle(Order order, Vehicle vehicle) {
 		this.order = order;
 		this.vehicle = vehicle;
-		this.requestBbpmId = requestBbpmId;
 	}
 
 	public OrderVehicleId getOrderVehicleId() {
@@ -118,14 +115,6 @@ public class OrderVehicle implements Serializable{
 		this.status = status;
 	}
 
-	public String getRequestBbpmId() {
-		return requestBbpmId;
-	}
-
-	public void setRequestBbpmId(String requestBbpmId) {
-		this.requestBbpmId = requestBbpmId;
-	}
-
 	public String getLogExternalData() {
 		return logExternalData;
 	}
@@ -139,7 +128,6 @@ public class OrderVehicle implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((order == null) ? 0 : order.hashCode());
-		result = prime * result + ((requestBbpmId == null) ? 0 : requestBbpmId.hashCode());
 		result = prime * result + ((vehicle == null) ? 0 : vehicle.hashCode());
 		return result;
 	}
@@ -158,11 +146,6 @@ public class OrderVehicle implements Serializable{
 				return false;
 		} else if (!order.equals(other.order))
 			return false;
-		if (requestBbpmId == null) {
-			if (other.requestBbpmId != null)
-				return false;
-		} else if (!requestBbpmId.equals(other.requestBbpmId))
-			return false;
 		if (vehicle == null) {
 			if (other.vehicle != null)
 				return false;
@@ -175,6 +158,6 @@ public class OrderVehicle implements Serializable{
 	public String toString() {
 		return "OrderVehicle [orderVehicleId=" + orderVehicleId + ", order=" + order + ", vehicle=" + vehicle
 				+ ", createDateTime=" + createDateTime + ", updateDateTime=" + updateDateTime + ", status=" + status
-				+ ", requestBbpmId=" + requestBbpmId + ", logExternalData=" + logExternalData + "]";
+				+ ", logExternalData=" + logExternalData + "]";
 	}
 }

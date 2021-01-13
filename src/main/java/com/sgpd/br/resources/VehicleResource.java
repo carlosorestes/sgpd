@@ -37,12 +37,6 @@ public class VehicleResource {
 		return ResponseEntity.ok().body(veiVehicle);
 	}
 	
-	@GetMapping(value = "/requestBbpmId/{requestBbpmId}")
-	public ResponseEntity<VehicleDTO> findById(@PathVariable String requestBbpmId){
-		VehicleDTO veiVehicle = vehicleService.findOrderVehicleByRequestBbpmId(requestBbpmId);
-		return ResponseEntity.ok().body(veiVehicle);
-	}
-	
 	@PatchMapping(value = "/renavam/{renavam}/orderId/{orderId}")
 	public ResponseEntity<VehicleDTO> update(@PathVariable String renavam, @PathVariable Long orderId, @RequestBody VehicleDTO vehicleDTO) throws IOException {
 		VehicleDTO veiVehicle = orderVehicleAssembler.toResource(vehicleService.updateStatusVehicleByOrderIdAndRenavam(renavam, orderId, vehicleDTO));
