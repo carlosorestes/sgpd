@@ -68,8 +68,8 @@ public class TestConfig implements CommandLineRunner {
 		
 		
 		
-		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), user1, person1, new Date(),new Date(),new Date(), "Recommendation Teste", "Note Teste", null);
-		Order o2 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), user1, person1, new Date(),new Date(),new Date(), "Recommendation Teste", "Note Teste", null);
+		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), user1, person1, new Date(),new Date(),new Date(), "Recommendation Teste", "Note Teste", "ANALISE");
+		Order o2 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), user1, person1, new Date(),new Date(),new Date(), "Recommendation Teste", "Note Teste", "ANALISE");
 		
 		userRepository.saveAll(Arrays.asList(user1, user2));
 		
@@ -81,17 +81,37 @@ public class TestConfig implements CommandLineRunner {
 		o2 = orderRepository.save(o2);
 		
 		OrderVehicle orderVehicle1 = new OrderVehicle(o1, v1);
+		orderVehicle1.setStatus("VEICULO NAO ENCONTRADO");
+		
 		OrderVehicle orderVehicle2 = new OrderVehicle(o1, v2);
+		orderVehicle2.setStatus("VEICULO COM RESTRICAO");
+		
 		OrderVehicle orderVehicle3 = new OrderVehicle(o1, v3);
+		orderVehicle3.setStatus("VEICULO SEM RESTRICAO");
+		
 		OrderVehicle orderVehicle4 = new OrderVehicle(o1, v4);
+		orderVehicle4.setStatus("VEICULO SEM RESTRICAO");
+		
 		OrderVehicle orderVehicle5 = new OrderVehicle(o1, v5);
+		orderVehicle5.setStatus("VEICULO COM RESTRICAO");
+		
 		o1.getListOrderVehicle().addAll(Arrays.asList(new OrderVehicle[] {orderVehicle1, orderVehicle2, orderVehicle3, orderVehicle4, orderVehicle5}));
 		
 		OrderVehicle orderVehicle10 = new OrderVehicle(o2, v10);
+		orderVehicle10.setStatus("VEICULO SEM RESTRICAO");
+		
 		OrderVehicle orderVehicle20 = new OrderVehicle(o2, v20);
+		orderVehicle20.setStatus("VEICULO NAO ENCONTRADO");
+		
 		OrderVehicle orderVehicle30 = new OrderVehicle(o2, v30);
+		orderVehicle30.setStatus("VEICULO NAO ENCONTRADO");
+		
 		OrderVehicle orderVehicle40 = new OrderVehicle(o2, v40);
+		orderVehicle40.setStatus("VEICULO SEM RESTRICAO");
+		
 		OrderVehicle orderVehicle50 = new OrderVehicle(o2, v50);
+		orderVehicle50.setStatus("VEICULO COM RESTRICAO");
+		
 		o2.getListOrderVehicle().addAll(Arrays.asList(new OrderVehicle[] {orderVehicle10, orderVehicle20, orderVehicle30, orderVehicle40, orderVehicle50}));
 		
 		orderVehicleRepository.saveAll(Arrays.asList(orderVehicle1, orderVehicle2, orderVehicle3, orderVehicle4, orderVehicle5,
