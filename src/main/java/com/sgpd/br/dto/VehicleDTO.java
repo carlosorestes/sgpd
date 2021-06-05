@@ -7,6 +7,7 @@ import javax.persistence.Column;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sgpd.br.entities.Order;
+import com.sgpd.br.enums.TipoVeiculo;
 
 public class VehicleDTO implements Serializable {
 	
@@ -15,8 +16,8 @@ public class VehicleDTO implements Serializable {
 	@JsonProperty(value= "id")
 	private Long id;
 	
-	@JsonProperty(value= "tipo")
-	private String tipo;
+	@JsonProperty(value= "tipoVeiculo")
+	private TipoVeiculo tipoVeiculo;
 	
 	@JsonProperty(value= "ano")
 	private Integer ano;
@@ -54,12 +55,12 @@ public class VehicleDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public TipoVeiculo getTipoVeiculo() {
+		return tipoVeiculo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoVeiculo(TipoVeiculo tipo) {
+		this.tipoVeiculo = tipo;
 	}
 
 	public Integer getAno() {
@@ -144,7 +145,7 @@ public class VehicleDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "VehicleDTO [tipo=" + tipo + ", ano=" + ano + ", modelo=" + modelo + ", cor=" + cor + ", placa=" + placa
+		return "VehicleDTO [tipo=" + tipoVeiculo + ", ano=" + ano + ", modelo=" + modelo + ", cor=" + cor + ", placa=" + placa
 				+ ", renavam=" + renavam + "]";
 	}
 	

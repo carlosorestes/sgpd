@@ -49,7 +49,7 @@ public class RestConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		System.out.println("configureGlobal - RestConfig");
-		auth.inMemoryAuthentication().withUser("javainuse").password("{noop}password").roles("USER");
+		auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").roles("USER");
 	}
 
 }

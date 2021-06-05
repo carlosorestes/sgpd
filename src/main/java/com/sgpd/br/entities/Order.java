@@ -50,7 +50,7 @@ public class Order implements Serializable {
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderVehicle> listOrderVehicle;
 	
-	@Column(name = "data_criacao", nullable = false)
+	@Column(name = "data_criacao")
 	private Date dataCriacao;
 	
 	@Column(name = "data_entrada_orgao", nullable = true)

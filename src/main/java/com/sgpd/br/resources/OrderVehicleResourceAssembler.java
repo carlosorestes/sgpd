@@ -11,7 +11,7 @@ public class OrderVehicleResourceAssembler {
 	public VehicleDTO toResource(OrderVehicle orderVehicle) {
 		VehicleDTO vehicleDTO = new VehicleDTO();
 			vehicleDTO.setId(orderVehicle.getVehicle().getId());
-			vehicleDTO.setTipo(orderVehicle.getVehicle().getTipoVeiculo().toString());
+			vehicleDTO.setTipoVeiculo(orderVehicle.getVehicle().getTipoVeiculo());
 			vehicleDTO.setAno(orderVehicle.getVehicle().getAno());
 			vehicleDTO.setModelo(orderVehicle.getVehicle().getModelo());
 			vehicleDTO.setCor(orderVehicle.getVehicle().getCor());

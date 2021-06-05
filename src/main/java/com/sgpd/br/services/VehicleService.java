@@ -32,7 +32,7 @@ public class VehicleService {
 		VehicleDTO vehicleDTO = new VehicleDTO();
 		OrderVehicle orderVehicle = orderVehicleRepository.findOrderVehicleByRenavamOrderId(renavam, orderId);
 		vehicleDTO.setId(orderVehicle.getOrder().getId());
-		vehicleDTO.setTipo(orderVehicle.getVehicle().getTipoVeiculo().name());
+		vehicleDTO.setTipoVeiculo(orderVehicle.getVehicle().getTipoVeiculo());
 		vehicleDTO.setAno(orderVehicle.getVehicle().getAno());
 		vehicleDTO.setModelo(orderVehicle.getVehicle().getModelo());
 		vehicleDTO.setCor(orderVehicle.getVehicle().getCor());
@@ -42,7 +42,6 @@ public class VehicleService {
 	}
 	
 	public OrderVehicle updateStatusVehicleByOrderIdAndRenavam(String renavam, Long orderId, VehicleDTO vehicleDTO) {
-		//TODO: Add Exception handle validation object is null
 		OrderVehicle orderVehicleMerged = orderVehicleRepository.findOrderVehicleByRenavamOrderId(renavam, orderId);
 		if(vehicleDTO != null) {
 			if(!StringUtils.isEmpty(vehicleDTO.getStatus())) {
@@ -50,7 +49,6 @@ public class VehicleService {
 			}
 			
 			if(!StringUtils.isEmpty(vehicleDTO.getLogExternalData())) {
-				System.out.println("xxxxxxxxx "+vehicleDTO.getLogExternalData());
 				orderVehicleMerged.setLogExternalData(vehicleDTO.getLogExternalData());
 			}
 		}

@@ -66,7 +66,7 @@ public class OrderService {
 			
 			if (vehicle == null) {
 				vehicle = new Vehicle(vehicleDTO.getId(), vehicleDTO.getAno(), vehicleDTO.getModelo(), vehicleDTO.getCor(), 
-						vehicleDTO.getPlaca(), vehicleDTO.getRenavam(), TipoVeiculo.tipoVeiculoOfByValue(Integer.parseInt(vehicleDTO.getTipo())));	
+						vehicleDTO.getPlaca(), vehicleDTO.getRenavam(), vehicleDTO.getTipoVeiculo());	
 				vehicleService.save(vehicle);
 			}
 //			Map<String, String> mapResponseBpm = bpmService.startProcessDefinitionKey("consult_traffic_ticket");
